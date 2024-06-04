@@ -1,3 +1,5 @@
+1.
+
 %option noyywrap
 %{
 #include <stdio.h>
@@ -37,9 +39,3 @@ int main() {
     fclose(yyin);
     return 0;
 }
-
-
-how to run:
-1. flex file_name.l
-2. gcc lex.yy.c
-3. ./a.exe
