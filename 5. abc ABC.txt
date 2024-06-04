@@ -1,3 +1,5 @@
+5.
+
 %option noyywrap
 %{
 #include <stdio.h>
@@ -43,38 +45,3 @@ int main() {
     fclose(yyin);
     return 0;
 }
-
-
-
-.......................................................
-
- Explanation: 
-
-1.  LEX Header (`%{ ... %}`): 
-   - Includes `stdio.h` for input/output and `string.h` for string manipulation functions.
-   - Declares variables to store counts:
-     - `character_count` for total characters.
-     - `word_count` for total words (simple count based on spaces).
-     - `line_count` for total lines (excluding comments).
-   - Defines an `is_comment_line` function to check if a line starts with '#'.
-
-2.  LEX Rules (`%% ... %%`): 
-   - `[^#]|\n+`: Matches any character except `#` or newlines. Increments `line_count` and checks for comments using `is_comment_line`.
-     - If not a comment:
-       - Increments `character_count` by the length of the matched text.
-       - Increments `word_count` if no space is found in the matched text (simple word detection).
-       - Prints the matched text (`printf`).
-   - `.|\n`: Matches any other character (optional error handling could be added here).
-
-3.  C Code (`int main() ... `): 
-   - Opens the input file "input.txt" for reading.
-   - Calls `yylex()` to start the lexical analysis process defined by the LEX specifications.
-   - Prints the counts of lines (excluding comments), words, and characters.
-   - Closes the input file.
-
-
-
-How to Run
-1. flex file_name.l
-2. gcc lex.yy.c
-3. ./a.exe
